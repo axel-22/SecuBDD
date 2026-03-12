@@ -17,3 +17,56 @@
 4)
 5)
 
+
+
+
+
+
+
+13) Nous avons utilisé notre base de TP avec la commande USE puis créé la table et inséré les données
+
+14) Voici le résultat de la commande : select arTIcle from SHoP :
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> select arTIcle from SHoP;
+    ERROR 1146 (42S02): Table 'TP_SecuBDD_Jemai_HoussinVonthron.SHoP' doesn't exist
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]>
+
+15) Voici les commandes pour autoriser un utilisateur customer qui à uniquement accès en lecture à notre table shop:
+
+
+16) Voici la sortie des requêtes suivantes :
+    SELECT MAX(article) AS article FROM shop;
+    +---------+
+    | article |
+    +---------+
+    |       4 |
+    +---------+
+    1 row in set (0.014 sec)
+    SELECT article, dealer, price FROM shop WHERE price=(SELECT MAX(price) FROM shop);
+    +---------+--------+-------+
+    | article | dealer | price |
+    +---------+--------+-------+
+    |    0004 | D      | 19.95 |
+    +---------+--------+-------+
+    1 row in set (0.111 sec)
+    SELECT article, MAX(price) AS price FROM shop GROUP BY article;
+    +---------+-------+
+    | article | price |
+    +---------+-------+
+    |    0001 |  3.99 |
+    |    0002 | 10.99 |
+    |    0003 |  1.69 |
+    |    0004 | 19.95 |
+    +---------+-------+
+    4 rows in set (0.396 sec)
+    SELECT article, dealer, price FROM shop s1 WHERE price=(SELECT MAX(s2.price) FROM shop s2 WHERE s1.article = s2.article);
+    +---------+--------+-------+
+    | article | dealer | price |
+    +---------+--------+-------+
+    |    0001 | B      |  3.99 |
+    |    0002 | A      | 10.99 |
+    |    0003 | C      |  1.69 |
+    |    0004 | D      | 19.95 |
+    +---------+--------+-------+
+    4 rows in set (0.423 sec)
+
+17) 
