@@ -1,0 +1,19 @@
+####################################################################################
+#                                                                                  #
+#                  ENSIBS TP : Sécurisation des bases de données                   #
+#                                       TD2                                        #
+####################################################################################
+
+12/03/2026
+
+@authors HOUSSIN--VONTHRON Clément
+@authors JEMAI Axel
+
+####################################################################################
+
+1) Pour Ce TP nous avons utiliser le SGBD MariaDB, il s'agit d'une version opensource très réputé
+2) Voici le nom de notre base de données : TP_SecuBDD_Jemai_HoussinVonthron
+3)
+4)
+5)
+
