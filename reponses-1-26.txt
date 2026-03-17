@@ -79,7 +79,7 @@
     Réponse : 
     Query OK, 0 rows affected (0.059 sec)
 
-6 / afficher les privilèges de l'utilisateur connecté
+6) afficher les privilèges de l'utilisateur connecté
     Commande : 
     SHOW GRANTS FOR 'clement'@'localhost';
     ---
@@ -92,7 +92,7 @@
     +----------------------------------------------------------------------------------------------------------------+
 
 
-7 / afficher tous les utilisateurs du système selon le modèle suivant
+7) afficher tous les utilisateurs du système selon le modèle suivant
     Commande: 
     SELECT Host as host, User as user, authentication_string as password FROM mysql.user;
     ---
@@ -109,7 +109,7 @@
 
 
 
-8 / afficher la structure de la table des utilisateurs dans mySQL
+8) afficher la structure de la table des utilisateurs dans mySQL
     Commande:
     DESC mysql.user;
     ---
@@ -167,7 +167,7 @@
     +------------------------+---------------------+------+-----+----------+-------+
 
 
-9 / afficher la liste des tables dans le format suivant
+9) afficher la liste des tables dans le format suivant
     Commandes:
     USE mysql;
     SHOW TABLES;
@@ -209,7 +209,7 @@
     | user                      |
     +---------------------------+
 
-10 / afficher la version et l'heure du SGBDR
+10) afficher la version et l'heure du SGBDR
     Commande:
     SELECT VERSION(), NOW();
     --
@@ -220,7 +220,7 @@
     | 11.8.3-MariaDB-0+deb13u1 from Debian | 2026-03-12 08:58:50 |
     +--------------------------------------+---------------------+
 
-11 / créer la table des fournisseurs dans le modèle suivant
+11) créer la table des fournisseurs dans le modèle suivant
 
 Commandes:
 CREATE TABLE fournisseurs ( 
@@ -247,7 +247,7 @@ Records: 0  Duplicates: 0  Warnings: 0
 +--------+-------------+------+-----+---------+-------+
 Query OK, 0 rows affected (0.013 sec)
 
-12 / afficher le résutat de sin(PI/4) et de (4+1)*6 sur une même ligne
+12) afficher le résutat de sin(PI/4) et de (4+1)*6 sur une même ligne
 Commande:
 SELECT SIN(PI()/4), (4+1)*6;
 Réponse:
