@@ -318,3 +318,77 @@ Réponse:
     |  5 | polo  | red    |     2 |
     |  6 | dress | blue   |     2 |
     +----+-------+--------+-------+
+
+18) Veuilliez visualiser le fichier question18.py pour le script d'insertion.
+
+19) Pour affichier l'age, nous n'avons pas cet atribut dans la table, or il est dérivable donc nous pouvons le calculer à partir de la date du jour, voici la requête :
+    SELECT nom, TIMESTAMPDIFF(YEAR, naissance, CURDATE()) AS age
+    FROM animaux;
+    or certain animaux sont mort donc ajouter leur date de mort et non la date qu'il aurait eu s'ils avaient été vivant : 
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]>  SELECT nom,  TIMESTAMPDIFF(YEAR, naissance, CURDATE()) AS age FROM animaux WHERE mort IS NULL UNION SELECT nom, TIMESTAMPDIFF(YEAR, naissance, mort) FROM animaux  WHERE mort IS NOT NULL;
+    +----------+------+
+    | nom      | age  |
+    +----------+------+
+    | Fluffy   |   13 |
+    | Claws    |   12 |
+    | Buffy    |    6 |
+    | Fang     |   15 |
+    | Chirpy   |    7 |
+    | Whistler |    8 |
+    | Slim     |    9 |
+    | Puffball |    6 |
+    | Bowser   |    2 |
+    +----------+------+
+    9 rows in set (0.381 sec)
+
+20) Voici le résultat de la sortie de commande  SELECT 1 IS NULL:
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> SELECT 1 IS NULL, 1 IS NOT NULL;
+    +-----------+---------------+
+    | 1 IS NULL | 1 IS NOT NULL |
+    +-----------+---------------+
+    |         0 |             1 |
+    +-----------+---------------+
+    1 row in set (0.219 sec)
+
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> 
+
+    Cet requête permet de selectionner 1 s'il est null et 1 s'il ne l'est pas or 1 n'est pas null cela explique pourquoi mariaDB indique 1 dans la collone 1 IS NOT NULL;
+
+21) Voici comment faire une expression régulière avec b et p pour cela nous pouvons utilier REGEXP :
+    SELECT nom FROM animaux WHERE nom REGEXP '[bp]';
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> SELECT nom FROM animaux WHERE nom REGE
+    XP '[bP]';
+    +----------+
+    | nom      |
+    +----------+
+    | Buffy    |
+    | Bowser   |
+    | Chirpy   |
+    | Puffball |
+    +----------+
+    4 rows in set (0.316 sec)
+
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> 
+
+22) Voici comment changer le mot de passe de notre utilisateur Axel sur la machine 172.20.10.3
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> ALTER USER 'axel'@'172.20.10.3' IDENTIFIED BY 'mysql';
+    Query OK, 0 rows affected (0.178 sec)
+
+23) Voici comment utiliser la fonction SHA2 pour hacher les noms en sha2 256 
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> SELECT nom, SHA2(nom, 256) AS nom_hash FROM animaux;
+    +----------+------------------------------------------------------------------+
+    | nom      | nom_hash                                                         |
+    +----------+------------------------------------------------------------------+
+    | Fluffy   | 66443efe6ecf5853e9fc80b2250986d9606b07f1d15b1a0a1d5bd1eeeed7a153 |
+    | Claws    | 68a31aefb013bde5c9baadece2d532269c9f7a35699cb10f79136eca29938318 |
+    | Buffy    | c3db5a427cc41caef31a1144717d6fc8fe40ac9de5f7e6fc04fa07703452cb6c |
+    | Fang     | f1e508c4582c09cd3b6eba95c91fea8be8d838414f21b66756b48caf956ac4c5 |
+    | Bowser   | acbb1dfc1a03e909df40529005d30bdba791d76e32576d46d6ca0a5985d169c9 |
+    | Chirpy   | eeb2f73dcf0ea52561b0e9bb0ddd246502889c6cb65cfb43d0ac9766a68fd754 |
+    | Whistler | 51d96fa4a271b6ca13077763aedd8c4f501fcc5999a71f71d63a3b670743b4ea |
+    | Slim     | ccdff1053cf65cda0ac7dd2d8e1647579ca47f67cada853fb097b3936b443df4 |
+    | Puffball | 1ecf10271bb6709df45e93d5120212d3e044fd4e1e5395156bf168e77c5f9703 |
+    +----------+------------------------------------------------------------------+
+    9 rows in set (0.257 sec)
+
+    MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> 
