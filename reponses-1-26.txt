@@ -392,3 +392,24 @@ Réponse:
     9 rows in set (0.257 sec)
 
     MariaDB [TP_SecuBDD_Jemai_HoussinVonthron]> 
+
+24) Il existe un script fourni avec MySQL et MariaDB permettant de sécuriser une installation fraîche du serveur de base de données, quel est-il et que fait-il ?
+    Le script fourni par MySQl et MariaDB est mysql_secure_installation (https://dev.mysql.com/doc/refman/8.4/en/mysql-secure-installation.html).
+    Il permet de faire un hardening de la base de données lors d'une nouvelle installation de MariaDB ou/et MySQL;
+     You can set a password for root accounts.
+
+    Il permet entre autre de :
+    - Définir/Changer le mot de passe root
+    - Désactiver la connexion root à distance
+    - Supprimer les utilisateurs anonymes
+    - Supprimer la base de données 'test'
+
+25) Comment feriez-vous pour chiffrer une cellule sensible d'une de vos tables de base de données ?
+    En fonction du besoin et du contexte, il peut être intéressant de soit : 
+        - hasher la donné avant de l'insérer dans la base
+        - chiffrer la donnée (via chiffrement symétrique ou asymétrique) avant l'insertion en base
+
+26) Faites un dump de votre base de test dans un fichier "dump.sql"
+    Commande : 
+    mysqldump -u clement -p TP_SecuBDD_Jemai_HoussinVonthron > dump.sql
+    
