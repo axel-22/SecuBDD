@@ -1,7 +1,5 @@
 import mysql.connector
 
-
-
 data_to_insert = [
     ('Fluffy', 'Harold', 'chat', 'f', '2013-02-04', None),
     ('Claws', 'Gwen', 'chat', 'm', '2014-03-17', None),
