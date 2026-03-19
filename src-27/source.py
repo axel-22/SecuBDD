@@ -11,9 +11,9 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 conn = mysql.connector.connect(
-    user='clement',
-    password='clement',
-    host='127.0.0.1',
+    user='axel',
+    password='axel',
+    host='172.20.10.2',
     database='TP_SecuBDD_Jemai_HoussinVonthron'
 )
 
