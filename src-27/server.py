@@ -1,11 +1,10 @@
 ####################################################################################
 #                                                                                  #
 #                  ENSIBS TP : Sécurisation des bases de données                   #
-#                                       TD2                                        #
+#                                      Server TD2                                  #
 ####################################################################################
 
 import mysql.connector
-
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -19,12 +18,11 @@ conn = mysql.connector.connect(
 
 cursor = conn.cursor()
 
-# Création table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS employes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    salaire_enc TEXT,
-    salaire_ore BIGINT
+    salaire_enc TEXT NOT NULL,
+    salaire_ore BIGINT NOT NULL
 )
 """)
 conn.commit()
@@ -33,16 +31,20 @@ conn.commit()
 @app.route("/add", methods=["POST"])
 def add():
     data = request.json
-    enc = data["enc"]
-    ore = data["ore"]
 
     cursor.execute(
         "INSERT INTO employes (salaire_enc, salaire_ore) VALUES (%s, %s)",
-        (enc, ore)
+        (data["enc"], data["ore"])
     )
     conn.commit()
 
     return jsonify({"status": "ok"})
+
+
+@app.route("/list", methods=["GET"])
+def list_employees():
+    cursor.execute("SELECT id, salaire_enc FROM employes")
+    return jsonify(cursor.fetchall())
 
 
 @app.route("/compare", methods=["POST"])
@@ -57,11 +59,13 @@ def compare():
     s2 = cursor.fetchone()[0]
 
     if s1 > s2:
-        return jsonify({"result": "id1 > id2"})
+        result = "id1 > id2"
     elif s1 < s2:
-        return jsonify({"result": "id1 < id2"})
+        result = "id1 < id2"
     else:
-        return jsonify({"result": "egal"})
+        result = "egal"
+
+    return jsonify({"result": result})
 
 
 @app.route("/sum", methods=["GET"])
@@ -72,13 +76,13 @@ def sum_salaries():
 
     for (enc,) in cursor.fetchall():
         if total is None:
-            total = enc
+            total = int(enc)
         else:
-            total = str(int(total) + int(enc))  # addition homomorphe simulée
+            total += int(enc)
 
-    return jsonify({"sum": total})
+    return jsonify({"sum": str(total)})
 
 
 if __name__ == "__main__":
-    print("Serveur lancé sur http://127.0.0.1:5000")
-    app.run(port=5000)
+    print("Serveur lancé sur http://0.0.0.0:5000")
+    app.run(host="0.0.0.0", port=5000)
