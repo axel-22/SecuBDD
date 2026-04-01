@@ -15,3 +15,6 @@ CREATE DATABASE TP_SecuBDD_Jemai_HoussinVonthron;
 
 SHOW DATABASES;
 
+# REQUIRED Packages
+
+Merci de vouloir installer les paquets via `pip install` les paquets listés dans le fichier requirements.txt `pip install -r requirements.txt`
